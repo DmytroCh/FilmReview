@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         PACKAGE_NAME = getPackageName();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.films);
+        RecyclerView recyclerView = findViewById(R.id.films);
 
         // w celach optymalizacji
         recyclerView.setHasFixedSize(true);
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // dodajemy do listy filmy
         for(int i = 0; i < 10; i++){
-            Config.list.add(new Film("Film" + i, "Kategoria" + i, "nietykalni_logo.jpg"));
+            Config.list.add(new Film("Film" + i, "Kategoria" + i, "nietykalni_logo"));
         }
         recyclerView.setAdapter(new MyAdapter(Config.list, recyclerView));
     }
