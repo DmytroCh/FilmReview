@@ -27,10 +27,8 @@ public class MainActivity extends AppCompatActivity {
         // ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        // dodajemy do listy filmy
-        for(int i = 0; i < 10; i++){
-            Config.list.add(new Film("Film" + i, "Kategoria" + i, "nietykalni_logo"));
-        }
+        Config.addDatas();
+
         recyclerView.setAdapter(new MyAdapter(Config.list, recyclerView));
     }
 }
