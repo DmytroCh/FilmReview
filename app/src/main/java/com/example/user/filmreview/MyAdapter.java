@@ -83,4 +83,9 @@ public class MyAdapter extends RecyclerView.Adapter{
     public int getItemCount() {
         return listFilm.size();
     }
+
+    public void removeAt(int position){
+        listFilm.remove(position);
+        notifyItemRemoved(position);
+    }
 }

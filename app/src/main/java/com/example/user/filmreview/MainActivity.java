@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.AbsListView;
+import android.widget.SimpleAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static String PACKAGE_NAME;
@@ -15,8 +17,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(savedInstanceState == null){
+            //dodajemy dane do listy
+            Config.addDatas();
+        }
+
         PACKAGE_NAME = getPackageName();
-        RecyclerView recyclerView = findViewById(R.id.films);
+        final RecyclerView recyclerView = findViewById(R.id.films);
+
 
         // w celach optymalizacji
         recyclerView.setHasFixedSize(true);
@@ -27,8 +35,19 @@ public class MainActivity extends AppCompatActivity {
         // ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        Config.addDatas();
+        final MyAdapter myAdapter = new MyAdapter(Config.list, recyclerView);
+        recyclerView.setAdapter(myAdapter);
 
-        recyclerView.setAdapter(new MyAdapter(Config.list, recyclerView));
+
+
+        SwipeToDeleteCallback swipeHandler = new SwipeToDeleteCallback(this) {
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                myAdapter.removeAt(viewHolder.getAdapterPosition());
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeHandler);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 }
