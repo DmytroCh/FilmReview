@@ -1,10 +1,12 @@
 package com.example.user.filmreview;
 
+import java.io.Serializable;
+
 /**
  * Created by User on 15.04.2018.
  */
 
-public class Film {
+public class Film implements Serializable{
 
     private String title;
     private String category;

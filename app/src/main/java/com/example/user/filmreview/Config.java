@@ -8,18 +8,19 @@ import java.util.ArrayList;
 
 public class Config {
 
-    public static ArrayList<Film> list = new ArrayList<>();
+    public static ArrayList<Film> LIST = new ArrayList<>();
+    public static int FRAGMENTSCOUNT = 2;
     public static void addDatas(){
         // dodajemy do listy filmy
-        Config.list.add(new Film("Skazani na shawshank" , "Dramat", "skazani_na_shawshank_logo"));
-        Config.list.add(new Film("Nietykalni" , "Komedia", "nietykalni_logo"));
-        Config.list.add(new Film("Zielona mila" , "Dramat", "zielona_mila_logo"));
-        Config.list.add(new Film("Ojciec chrzestny" , "Gangsterski", "ojciec_chrzestny_logo"));
-        Config.list.add(new Film("Dwunastu gniewnych ludzi" , "Dramat sądowy", "dwunastu_gniewnych_ludzi_logo"));
-        Config.list.add(new Film("Forrest Gump" , "Dramat, Komedia", "forrest_gump_logo"));
-        Config.list.add(new Film("Lot nad kukułczym gniazdem" , "Psychologiczny", "lot_nad_kukulczym_gniazdem_logo"));
-        Config.list.add(new Film("Ojciec chrzestny 2" , "Gangsterski", "ojciec_chrzestny2_logo"));
-        Config.list.add(new Film("Władca Pierścieni: Powrót króla" , "Fantasy", "wladca_pierscieni_powrot_krola_logo"));
-        Config.list.add(new Film("Lista Schindlera" , "Wojenny", "lista_schindlera_logo"));
+        Config.LIST.add(new Film("Skazani na shawshank" , "Dramat", "skazani_na_shawshank"));
+        Config.LIST.add(new Film("Nietykalni" , "Komedia", "nietykalni"));
+        Config.LIST.add(new Film("Zielona mila" , "Dramat", "zielona_mila"));
+        Config.LIST.add(new Film("Ojciec chrzestny" , "Gangsterski", "ojciec_chrzestny"));
+        Config.LIST.add(new Film("Dwunastu gniewnych ludzi" , "Dramat sądowy", "dwunastu_gniewnych_ludzi"));
+        Config.LIST.add(new Film("Forrest Gump" , "Dramat, Komedia", "forrest_gump"));
+        Config.LIST.add(new Film("Lot nad kukułczym gniazdem" , "Psychologiczny", "lot_nad_kukulczym_gniazdem"));
+        Config.LIST.add(new Film("Ojciec chrzestny 2" , "Gangsterski", "ojciec_chrzestny2"));
+        Config.LIST.add(new Film("Władca Pierścieni: Powrót króla" , "Fantasy", "wladca_pierscieni_powrot_krola"));
+        Config.LIST.add(new Film("Lista Schindlera" , "Wojenny", "lista_schindlera"));
     }
 }

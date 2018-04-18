@@ -1,12 +1,15 @@
 package com.example.user.filmreview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.user.filmreview.detailActivity.DetailActivity;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,9 @@ public class MyAdapter extends RecyclerView.Adapter{
 
     // obiekt listy
     private RecyclerView mRecyclerView;
+
+    //context ViewHoldera
+    private Context context;
 
     // konstruktor adaptera
     public MyAdapter(ArrayList<Film> list, RecyclerView pRecyclerView){
@@ -38,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter{
 
         public MyViewHolder(View pItem) {
             super(pItem);
-            //Context context = itemView.getContext();
+            context = itemView.getContext();
             icon = (ImageView) pItem.findViewById(R.id.icon);
             title = (TextView) pItem.findViewById(R.id.title);
             category = (TextView) pItem.findViewById(R.id.category);
@@ -46,10 +52,12 @@ public class MyAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-        // tworzymy layout osoby oraz obiekt ViewHoldera
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup viewGroup, final int i) {
+        // tworzymy layout filmu oraz obiekt ViewHoldera
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.film_layout, viewGroup, false);
+
+        final MyViewHolder myViewHolder = new MyViewHolder(view);
 
 
         // dla elementu listy ustawiamy obiekt OnClickListener,
@@ -57,16 +65,13 @@ public class MyAdapter extends RecyclerView.Adapter{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // odnajdujemy indeks klikniętego elementu
-                //int positionToDelete = mRecyclerView.getChildAdapterPosition(v);
-                // usuwamy element ze źródła danych
-                //listPerson.remove(positionToDelete);
-                // poniższa metoda w animowany sposób usunie element z listy
-                //notifyItemRemoved(positionToDelete);
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("Film", listFilm.get(myViewHolder.getAdapterPosition()));
+                context.startActivity(intent);
             }
         });
         // tworzymy i zwracamy obiekt ViewHolder
-        return new MyViewHolder(view);
+        return myViewHolder;
     }
 
     @Override

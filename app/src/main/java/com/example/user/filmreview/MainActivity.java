@@ -6,8 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.widget.AbsListView;
-import android.widget.SimpleAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static String PACKAGE_NAME;
@@ -25,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         PACKAGE_NAME = getPackageName();
         final RecyclerView recyclerView = findViewById(R.id.films);
 
-
         // w celach optymalizacji
         recyclerView.setHasFixedSize(true);
 
@@ -35,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
         // ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        final MyAdapter myAdapter = new MyAdapter(Config.list, recyclerView);
+        final MyAdapter myAdapter = new MyAdapter(Config.LIST, recyclerView);
         recyclerView.setAdapter(myAdapter);
 
 
 
-        SwipeToDeleteCallback swipeHandler = new SwipeToDeleteCallback(this) {
+        SwipeToDeleteCallback swipeHandler = new SwipeToDeleteCallback() {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 myAdapter.removeAt(viewHolder.getAdapterPosition());
