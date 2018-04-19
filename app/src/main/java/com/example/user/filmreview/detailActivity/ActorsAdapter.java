@@ -1,6 +1,6 @@
 package com.example.user.filmreview.detailActivity;
 
-import android.content.Context;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.user.filmreview.Config;
 import com.example.user.filmreview.MainActivity;
 import com.example.user.filmreview.R;
 
@@ -22,10 +24,8 @@ public class ActorsAdapter extends RecyclerView.Adapter{
 
     // źródło danych
     private ArrayList<Actor> listActor = new ArrayList<>();
-
     // obiekt listy
     private RecyclerView mRecyclerView;
-
     private Bitmap myBitmap;
 
 
@@ -72,7 +72,7 @@ public class ActorsAdapter extends RecyclerView.Adapter{
         Actor actor = listActor.get(position);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
-        int id = mRecyclerView.getResources().getIdentifier(actor.getImage(), "drawable", MainActivity.PACKAGE_NAME);
+        int id = mRecyclerView.getResources().getIdentifier(actor.getImage(), Config.IMAGETYPE, MainActivity.PACKAGE_NAME);
         myBitmap = BitmapFactory.decodeResource(mRecyclerView.getResources(), id, options);
         ((ActorsAdapter.MyViewHolder) holder).icon.setImageBitmap(myBitmap);
         ((MyViewHolder) holder).name.setText(actor.getName());

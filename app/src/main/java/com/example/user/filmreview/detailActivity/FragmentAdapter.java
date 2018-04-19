@@ -17,7 +17,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     }
 
 
-
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -28,7 +27,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         }
         return null;
     }
-
 
     @Override
     public int getCount() {

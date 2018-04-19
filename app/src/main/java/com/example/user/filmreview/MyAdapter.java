@@ -21,12 +21,11 @@ public class MyAdapter extends RecyclerView.Adapter{
 
     // źródło danych
     private ArrayList<Film> listFilm = new ArrayList<>();
-
     // obiekt listy
     private RecyclerView mRecyclerView;
-
     //context ViewHoldera
     private Context context;
+
 
     // konstruktor adaptera
     public MyAdapter(ArrayList<Film> list, RecyclerView pRecyclerView){
@@ -56,9 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter{
         // tworzymy layout filmu oraz obiekt ViewHoldera
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.film_layout, viewGroup, false);
-
-        final MyViewHolder myViewHolder = new MyViewHolder(view);
-
+        final MyViewHolder myViewHolder= new MyViewHolder(view);
 
         // dla elementu listy ustawiamy obiekt OnClickListener,
         // który otworzy activity dla elementu z listy po kliknięciu na niego
@@ -66,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("Film", listFilm.get(myViewHolder.getAdapterPosition()));
+                intent.putExtra(Config.FILMINSTANTNAME, listFilm.get(myViewHolder.getAdapterPosition()));
                 context.startActivity(intent);
             }
         });
@@ -78,7 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
         //uzupełniamy layout filmu
         Film film = listFilm.get(i);
-        int id = mRecyclerView.getResources().getIdentifier(film.getImageName(), "drawable", MainActivity.PACKAGE_NAME);
+        int id = mRecyclerView.getResources().getIdentifier(film.getImageName(), Config.IMAGETYPE, MainActivity.PACKAGE_NAME);
         ((MyViewHolder) viewHolder).icon.setImageResource(id);
         ((MyViewHolder) viewHolder).title.setText(film.getTitle());
         ((MyViewHolder) viewHolder).category.setText(film.getCategory());

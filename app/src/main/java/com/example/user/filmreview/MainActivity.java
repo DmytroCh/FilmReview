@@ -9,6 +9,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 public class MainActivity extends AppCompatActivity {
     public static String PACKAGE_NAME;
+    private RecyclerView recyclerView;
+    private MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +22,20 @@ public class MainActivity extends AppCompatActivity {
             Config.addDatas();
         }
 
-        PACKAGE_NAME = getPackageName();
-        final RecyclerView recyclerView = findViewById(R.id.films);
+        initializeVariables();
 
+        workOnRecyclerView();
+
+        deleteOnSweep();
+    }
+
+    private void initializeVariables(){
+        PACKAGE_NAME = getPackageName();
+        recyclerView = findViewById(R.id.films);
+        myAdapter = new MyAdapter(Config.LIST, recyclerView);
+    }
+
+    private void workOnRecyclerView(){
         // w celach optymalizacji
         recyclerView.setHasFixedSize(true);
 
@@ -32,11 +45,10 @@ public class MainActivity extends AppCompatActivity {
         // ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        final MyAdapter myAdapter = new MyAdapter(Config.LIST, recyclerView);
         recyclerView.setAdapter(myAdapter);
+    }
 
-
-
+    private void deleteOnSweep(){
         SwipeToDeleteCallback swipeHandler = new SwipeToDeleteCallback() {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
@@ -47,4 +59,5 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeHandler);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
+
 }

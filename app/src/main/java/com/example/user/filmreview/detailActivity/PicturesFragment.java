@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.user.filmreview.Config;
 import com.example.user.filmreview.Film;
 import com.example.user.filmreview.MainActivity;
 import com.example.user.filmreview.R;
@@ -23,7 +25,10 @@ public class PicturesFragment extends Fragment {
 
     ArrayList<ImageView> list = new ArrayList<>();
     private Bitmap myBitmap;
-
+    private Film film;
+    private View rootView;
+    private BitmapFactory.Options options;
+    private int id;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +38,14 @@ public class PicturesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Film film = (Film) getActivity().getIntent().getSerializableExtra("Film");
-        View rootView = inflater.inflate(R.layout.pictures_fragment, container, false);
+        initializeVariables(inflater, container);
+        return rootView;
+    }
+
+    private void initializeVariables(LayoutInflater inflater, ViewGroup container){
+        film = (Film) getActivity().getIntent().getSerializableExtra(Config.FILMINSTANTNAME);
+        rootView = inflater.inflate(R.layout.pictures_fragment, container, false);
+        options = new BitmapFactory.Options();
 
         list.add((ImageView)rootView.findViewById(R.id.image1));
         list.add((ImageView)rootView.findViewById(R.id.image2));
@@ -43,18 +54,12 @@ public class PicturesFragment extends Fragment {
         list.add((ImageView)rootView.findViewById(R.id.image5));
         list.add((ImageView)rootView.findViewById(R.id.image6));
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
 
-
-
-        int id;
         for(int i = 0; i < list.size();i++){
-            id = getResources().getIdentifier(film.getImageName() +"_" + (i+1), "drawable", MainActivity.PACKAGE_NAME);
+            id = getResources().getIdentifier(film.getImageName() +Config.SLASHDOWN + (i+1), Config.IMAGETYPE, MainActivity.PACKAGE_NAME);
             myBitmap = BitmapFactory.decodeResource(getResources(), id, options);
             list.get(i).setImageBitmap(myBitmap);
         }
-
-        return rootView;
     }
 }
